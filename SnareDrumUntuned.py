@@ -44,6 +44,8 @@ frequencies = np.fft.fftfreq(len(signalSnareDrumUntuned), d=T)
 plt.figure(num=2)
 plt.title('Fast Fourier Transform of Snare Drum Untuned')
 plt.plot(frequencies,fftVal)
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Amplitude')
 plt.grid(True)
 plt.show()
 

@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.axes as ax
 import numpy as np
 import scipy as scp
 import wave
@@ -36,13 +37,19 @@ plt.draw()
 # Trying to plot the fft
 fftVal = abs(np.fft.fft(signalSnareDrumTuned))
 frequencies = np.fft.fftfreq(len(signalSnareDrumTuned), d=T)
-# print(frequencies[1] - frequencies[0])
-# print(44100/len(signalSnareDrumTuned))
 
+# Cutting the arrays to match only positives values
+fftPositiveValues = fftVal[frequencies > 0]
+frequenciesPositives = frequencies[frequencies > 0]
+
+# Creating a mask for scale the plot
+maskScale = (frequenciesPositives >= 0) & (frequenciesPositives <= 3000)
+
+# Ploting fft
 plt.figure(num=2)
-plt.title('Fast Fourier Transform of Tuned Snare Drum')
-plt.plot(frequencies,fftVal)
-plt.xlabel('Frequency (Hz)')
+plt.plot(frequenciesPositives[maskScale],fftPositiveValues[maskScale])
+plt.title('Frequências presentes na Caixa afinada')
+plt.xlabel('Frequência (Hz)')
 plt.ylabel('Amplitude')
 plt.grid(True)
 plt.show()

@@ -3,8 +3,10 @@ import numpy as np
 import scipy as scp
 import wave
 import sys
+import os
 from scipy.io import wavfile
 from scipy.fftpack import fft
+
 
 # Open file
 snareDrumUntuned = wave.open('./Records/SnareDrumUntunedMono.wav', "r")
@@ -26,12 +28,17 @@ if snareDrumUntuned.getnchannels() == 2:
 timeSeconds = np.linspace(0, len(signalSnareDrumUntuned)/frequenciaAmostragem, num=len(signalSnareDrumUntuned))
 
 timeResponse = plt.figure(num=1)
-plt.title('Snare Drum Untuned')
+plt.title('Resposta temporal para a caixa desafinada')
 plt.plot(timeSeconds,signalSnareDrumUntuned)
 plt.xlabel('Time (s)')
 plt.ylabel('Sound Amplitude')
 plt.grid(True)
 plt.draw()
+
+# Create the file Graphs if it doesn't exists
+if not os.path.exists('Graphs'):
+    os.makedirs('Graphs')
+    
 timeResponse.savefig("Graphs/TimeResponseSnareUntuned.pdf", bbox_inches='tight')
 
 # Trying to plot the fft
@@ -46,7 +53,7 @@ frequenciesPositives = frequencies[frequencies > 0]
 maskScale = (frequenciesPositives >= 0) & (frequenciesPositives <= 3000)
 
 frequencyResponse = plt.figure(num=2)
-plt.title('Fast Fourier Transform of Snare Drum Untuned')
+plt.title('Resposta em frequência da caixa desafinada')
 plt.plot(frequenciesPositives[maskScale],fftPositiveValues[maskScale])
 plt.xlabel('Frequency (Hz)')
 plt.ylabel('Amplitude')

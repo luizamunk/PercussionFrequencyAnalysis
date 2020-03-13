@@ -13,7 +13,7 @@ if not os.path.exists('Graphs'):
     os.makedirs('Graphs')
 
 # Open file
-snareDrumTuned = wave.open('/home/luizmunk/Documents/TCC/Codes/Records/SnareDrum196HzMono.wav', "r")
+snareDrumTuned = wave.open('/home/luizmunk/Documents/TCC/Codes/Records/SnareDrumTunedLowAtack.wav', "r")
 
 # Extract Raw Audio from Wav File
 signalSnareDrumTuned = snareDrumTuned.readframes(-1)
@@ -31,13 +31,13 @@ if snareDrumTuned.getnchannels() == 2:
 timeSeconds = np.linspace(0, len(signalSnareDrumTuned)/fs, num=len(signalSnareDrumTuned))
 
 timeResponse = plt.figure(num=1)
-plt.title('Resposta temporal da caixa afinada')
+plt.title('Resposta temporal da caixa afinada com ataque fraco')
 plt.plot(timeSeconds,signalSnareDrumTuned)
 plt.xlabel('Time (s)')
 plt.ylabel('Sound Amplitude')
 plt.grid(True)
 plt.draw()
-timeResponse.savefig("Graphs/TimeResponseSnareTuned.pdf", bbox_inches='tight')
+timeResponse.savefig("/home/luizmunk/Documents/TCC/Codes/Graphs/TimeResponseSnareTunedLowAttack.pdf", bbox_inches='tight')
 
 
 # Trying to plot the fft
@@ -54,10 +54,10 @@ maskScale = (frequenciesPositives >= 0) & (frequenciesPositives <= 3000)
 # Ploting fft
 frequencyResponse = plt.figure(num=2)
 plt.plot(frequenciesPositives[maskScale],fftPositiveValues[maskScale])
-plt.title('Resposta em frequência da caixa afinada')
+plt.title('Resposta em frequência da caixa afinada com ataque fraco')
 plt.xlabel('Frequência (Hz)')
 plt.ylabel('Amplitude')
 plt.grid(True)
 plt.show()
-frequencyResponse.savefig("Graphs/FrequencyResponseSnareTuned.pdf", bbox_inches='tight')
+frequencyResponse.savefig("/home/luizmunk/Documents/TCC/Codes/Graphs/FrequencyResponseSnareTunedLowAttack.pdf", bbox_inches='tight')
 

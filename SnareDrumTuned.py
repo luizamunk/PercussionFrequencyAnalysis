@@ -13,7 +13,7 @@ if not os.path.exists('Graphs'):
     os.makedirs('Graphs')
 
 # Open file
-snareDrumTuned = wave.open('/home/luizmunk/Documents/TCC/Codes/Records/SnareDrum196HzMono.wav', "r")
+snareDrumTuned = wave.open('/home/luizmunk/Documents/TCC/Codes/Records/SnareDrumTuned.wav', "r")
 
 # Extract Raw Audio from Wav File
 signalSnareDrumTuned = snareDrumTuned.readframes(-1)

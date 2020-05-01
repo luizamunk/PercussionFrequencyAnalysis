@@ -9,7 +9,7 @@ def mag2db(mag):
 def fftExtraction(rawAudioSignal, signalPeriod):
     numberOfZeros = abs(numberOfSamples - len(rawAudioSignal))
 
-    # Normalizing audioyo size
+    # Normalizing audio size
     if len(rawAudioSignal) < numberOfSamples:
         rawAudioSignal = np.append(rawAudioSignal,np.zeros(numberOfZeros))
     else:

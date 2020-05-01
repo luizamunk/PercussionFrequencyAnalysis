@@ -16,10 +16,10 @@ if not os.path.exists('Graphs'):
 snareDrumTuned = wave.open('/home/luizmunk/Documents/TCC/Codes/Records/SnareDrumTunedLowAtack.wav', "r")
 
 # Extract Raw Audio from Wav File
-signalSnareDrumTuned = snareDrumTuned.readframes(-1)
-signalSnareDrumTuned = np.frombuffer(signalSnareDrumTuned, dtype='int16')
+signalSnareDrumTunedLowAttack = snareDrumTuned.readframes(-1)
+signalSnareDrumTunedLowAttack = np.frombuffer(signalSnareDrumTunedLowAttack, dtype='int16')
 fs = snareDrumTuned.getframerate()
-numberOfSamples = len(signalSnareDrumTuned)
+numberOfSamples = len(signalSnareDrumTunedLowAttack)
 T = 1.0/fs
 
 # Checking if is Mono or Stereo. Should we work with stereo?
@@ -28,11 +28,11 @@ if snareDrumTuned.getnchannels() == 2:
     sys.exit(0)
 
 # Creating time vector to see x axis in seconds
-timeSeconds = np.linspace(0, len(signalSnareDrumTuned)/fs, num=len(signalSnareDrumTuned))
+timeSeconds = np.linspace(0, len(signalSnareDrumTunedLowAttack)/fs, num=len(signalSnareDrumTunedLowAttack))
 
 timeResponse = plt.figure(num=1)
 plt.title('Resposta temporal da caixa afinada com ataque fraco')
-plt.plot(timeSeconds,signalSnareDrumTuned)
+plt.plot(timeSeconds,signalSnareDrumTunedLowAttack)
 plt.xlabel('Time (s)')
 plt.ylabel('Sound Amplitude')
 plt.grid(True)
@@ -41,8 +41,8 @@ timeResponse.savefig("/home/luizmunk/Documents/TCC/Codes/Graphs/TimeResponseSnar
 
 
 # Trying to plot the fft
-fftVal = abs(np.fft.fft(signalSnareDrumTuned))
-frequencies = np.fft.fftfreq(len(signalSnareDrumTuned), d=T)
+fftVal = abs(np.fft.fft(signalSnareDrumTunedLowAttack))
+frequencies = np.fft.fftfreq(len(signalSnareDrumTunedLowAttack), d=T)
 
 # Cutting the arrays to match only positives values
 fftPositiveValues = fftVal[frequencies > 0]

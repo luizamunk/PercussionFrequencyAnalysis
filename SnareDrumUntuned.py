@@ -7,7 +7,6 @@ import os
 from scipy.io import wavfile
 from scipy.fftpack import fft
 
-
 # Open file
 snareDrumUntuned = wave.open('./Records/SnareDrumUntunedMono.wav', "r")
 
